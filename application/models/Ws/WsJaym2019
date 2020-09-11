@@ -1,0 +1,118 @@
+SELECT * FROM dis_request_sd_subdetail_package a
+WHERE a.`order`=20298 AND a.id_status IN (17,19)
+
+SELECT
+sys_status.id_status,
+access_order.`client`,
+access_order.project,
+access_order.reference,
+dis_request_sd_detail.id_request_sd,
+dis_request_sd_detail.id_remission,
+dis_request_sd_detail.id_request_detail,
+dis_request_sd_detail.`order`,
+dis_request_sd_detail.`name`,
+dis_request_sd_detail.pack,
+dis_request_sd_detail.id_order_package,
+dis_request_sd_detail.quantity_packets,
+dis_request_sd_detail.weight,
+dis_request_sd_detail.type,
+dis_request_sd_detail.id_forniture,
+sys_status.description as statusdetails ,
+sys_status.HEX
+
+FROM
+dis_request_sd_detail 
+INNER JOIN sys_status ON dis_request_sd_detail.id_status = sys_status.id_status
+JOIN access_order    ON dis_request_sd_detail.`order`=access_order.`order`
+and dis_request_sd_detail.id_request_sd=4
+order by dis_request_sd_detail.`name`, dis_request_sd_detail.pack
+
+function GetRequestUno(){
+		
+			if(!empty($this->input->post('idrequest')))
+				$this->db->where('a.id_request_sd',$this->input->post('idrequest'));
+	
+			if(!empty($this->input->post('idstatus')))
+				$this->db->where_in('a.id_status',$this->input->post('idstatus'));
+	
+			//fweight_vehicle(c.id_weight_vehicle) as weight_estimate_trunk ,
+			$result = $this->db->select(" a.id_status,	d.`client`,
+										d.project,	d.reference,
+										a.id_request_sd,a.id_remission,
+										a.id_request_detail,a.`order`,
+										a.`name`,	a.pack,
+										a.id_order_package,	a.quantity_packets,
+										a.weight,
+										a.type,
+										a.id_forniture,
+										c.driver,
+										c.license_plate,
+										w.max_weight as weight_estimate_trunk  ,
+										sys_status.id_status,
+										sys_status.description as statusdetails ")
+								->from('dis_request_sd_detail  a ')
+								->JOIN('sys_status','a.id_status = sys_status.id_status') 
+								->JOIN('access_order d ','a.`order`=d.`order`')
+								->JOIN('dis_request_sd c','a.id_request_sd = c.id_request_sd')
+								->JOIN('dis_weight_vehicle w', 'c.id_weight_vehicle = w.id_weight_vehicle')
+								->ORDER_BY('c.id_request_sd','asc')
+								->get();
+	
+				//print_r($this->db->last_query());
+				return $result->result();
+			
+			 
+	
+		}
+
+
+
+
+
+ public function ftotalrequests1_post()
+    {
+        $headers = $this->input->request_headers();
+        
+                                                
+        if (array_key_exists('Authorization', $headers) && !empty($headers['Authorization'])) {
+            $decodedToken = AUTHORIZATION::validateToken($headers['Authorization']);
+        
+            if ($decodedToken != false) {
+                $response = (object) array('status'=>'OK');
+               
+                $arr = (object) array();
+                $arr->data = $this->M_Ws->SumTotalRequest();
+                
+                $message=''; 
+                $statusmessage=true;
+               if($arr->data->id_request_sd!=null) {
+                   $trasaction_err='OK'; 
+                   $statusmessage=true;
+               }
+               else {
+                $trasaction_err='Error'; 
+                $statusmessage=false;
+                $message='Error not Found id_request_sd'; 
+               }
+               // pb
+                $response = array('Transaction'=>array('status'=>$trasaction_err),
+                                   'id_request_sd'=>$arr->data->id_request_sd,
+                                   'Packets' =>array('Status'   =>$arr->data->status_packets,
+                                   'Quantity' => array('Total'=>$arr->data->totalqty_packets,
+                                             'Load'=>$arr->data->qty_packetsLoad,
+                                             'Pending'=>$arr->data->pendingqtypack),
+                                  'Weight' => array('Total'=>$arr->data->totalweight,
+                                                     'Load'=>$arr->data->weight_packetsLoad,
+                                                     'Pending'=>$arr->data->pendingweigthload)
+                                  ), 'Warning' => array('message'=>$message,
+                                               'Last_Packet_Read'=>'M123-6',
+                                               'statusmessage'=>true) 
+                                );
+              $this->set_response($response, REST_Controller::HTTP_OK);
+                return;
+            }
+        }
+
+        $this->set_response(array('res'=>"Unauthorised"), REST_Controller::HTTP_UNAUTHORIZED);
+    }
+       
