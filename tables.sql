@@ -273,14 +273,15 @@ CREATE TABLE `sys_users` (
   KEY `rol` (`rol`),
   CONSTRAINT `sys_users_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `sys_status` (`id_status`),
   CONSTRAINT `sys_users_ibfk_2` FOREIGN KEY (`rol`) REFERENCES `sys_roles` (`id_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_users` */
 
 insert  into `sys_users`(`id_users`,`name`,`user`,`password`,`rol`,`id_status`,`last_entry`) values 
-(1,'Ivan Contreras','Ivanc','383b040d407308374fb758b48c10fbf3',1,1,'2020-09-11 09:22:28'),
+(1,'Ivan Contreras','Ivanc','383b040d407308374fb758b48c10fbf3',1,1,'2020-09-16 22:24:10'),
 (6,'prueba','prueba','53580d4a0343209a5a6725d8453012bb',2,1,'2020-09-10 12:10:24'),
-(7,'standar','standar','4d62a5c43432ecf85e830b559cb85577',2,1,'2020-09-11 09:23:02');
+(7,'standar','standar','4d62a5c43432ecf85e830b559cb85577',2,1,'2020-09-11 09:23:02'),
+(8,'admin','admin','f06785e03684763f1238b1451792724f',1,1,'2020-09-16 22:25:58');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

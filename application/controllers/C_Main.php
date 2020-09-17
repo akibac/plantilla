@@ -13,10 +13,10 @@ class C_Main extends Controller {
         if ($this->session->has_userdata('IdRol')) {
             header('Location: ' . base_url()."C_Panel");
         }else{
-            $this->load->library('Googleplus');
+            //$this->load->library('Googleplus');
             //Create Google Btn
-            $contents['login_url'] = $this->googleplus->loginURL();
-            $this->load->view('Login/V_Login',$contents);
+            // $contents['login_url'] = $this->googleplus->loginURL();
+            // $this->load->view('Login/V_Login',$contents);
         }
     }
     
