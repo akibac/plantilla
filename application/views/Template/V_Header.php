@@ -43,7 +43,7 @@
                 
 
                 <li class="nav-item">
-                  <a class="nav-link active" href="examples/dashboard.html">
+                  <a class="nav-link active" href="<?=base_url()?>">
                     <i class="ni ni-tv-2 text-primary"></i>
                     <span class="nav-link-text">Dashboard</span>
                   </a>
@@ -255,7 +255,7 @@
                   <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                       <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="<?= base_url() ?>dist/argon/assets/img/theme/team-4.jpg">
+                        <img alt="Image placeholder" src="<?= base_url() ?>dist/profile/<?=$this->session->IdUser?>/<?=$this->session->img_pro?>">
                       </span>
                       <div class="media-body  ml-2  d-none d-lg-block">
                         <span class="mb-0 text-sm  font-weight-bold"><?= $this->session->NameUser ?></span>
@@ -266,11 +266,11 @@
                     <div class="dropdown-header noti-title">
                       <h6 class="text-overflow m-0">Welcome!</h6>
                     </div>
-                    <a href="#!" class="dropdown-item">
+                    <a href="<?=base_url()?>Admin/C_Users/detail_user" class="dropdown-item">
                       <i class="ni ni-single-02"></i>
                       <span>My profile</span>
                     </a>
-                    <a href="#!" class="dropdown-item">
+                    <a href="<?=base_url()?>Admin/C_Users/Settings" class="dropdown-item">
                       <i class="ni ni-settings-gear-65"></i>
                       <span>Settings</span>
                     </a>

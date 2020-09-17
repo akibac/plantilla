@@ -32,7 +32,7 @@ class M_Users extends VS_Model {
             "id_status"	=> '1'
         );
         $this->db->insert("sys_users",$data);
-        $rs = $this->db->insert_id();
+        return $this->db->insert_id();
     }
 
     function get_data_user(){
@@ -45,14 +45,41 @@ class M_Users extends VS_Model {
     	$data = array(
 		    "name"	=> $this->name,
 		    "user"	=> $this->user,
-		    "rol"	=> $this->rol
+		    "rol" => $this->rol
 		);
 		$this->db->where("id_users",$this->id_user);
 		return $this->db->update("sys_users",$data);
     }
 
+    function update_img(){
+        $newdata = array(
+            'img_pro'   => $this->img
+        );
+        $this->session->set_userdata($newdata);
+        $data = array(
+            "img_profile"   => $this->img
+        );
+        $this->db->where("id_users",$this->id_user);
+        return $this->db->update("sys_users",$data);
+    }
+
     function delete(){
     	$this->db->where("id_users",$this->id_user);
         return $this->db->delete("sys_users");
+    }
+
+    function get_user_detail(){
+        $id_user = $this->session->IdUser;
+        $query = ("SELECT * FROM sys_users u INNER JOIN sys_roles r ON u.rol = r.id_roles WHERE u.id_users = $id_user");
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
+    function change_password(){
+        $data = array(
+            "password"   => md5('07'.$this->pass)
+        );
+        $this->db->where("id_users",$this->session->IdUser);
+        return $this->db->update("sys_users",$data);
     }
 }

@@ -8,12 +8,12 @@
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
               <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Administración Usuarios</li>
+              <li class="breadcrumb-item active" aria-current="page">Configuraciónes</li>
             </ol>
           </nav>
         </div>
         <div class="col-lg-6 col-5 text-right">
-          <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target=".bd-example-modal-lg">Nuevo Usuario</a>
+          <!-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target=".bd-example-modal-lg">Nuevo Usuario</a> -->
           <!-- <a href="#" class="btn btn-sm btn-neutral" onclick="modal_rol()">Nuevo Rol</a> -->
         </div>
       </div>
@@ -29,15 +29,33 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Datos de usuario</h3>
+              <h3 class="mb-0">Cambio de Contraseña</h3>
             </div>
             <!-- <div class="col text-right">
               <a href="#!" class="btn btn-sm btn-primary">See all</a>
             </div> -->
           </div>
         </div>
-        <div class="table-responsive" id="content">
-			<?=$table?>
+        <div class="card-body">
+        	<div class="row">
+        		<div class="col">
+	        		<div class="form-group">
+	        			<label>Nueva Contraseña</label>
+	        			<input type="password" class="form-control" id="psw">
+	        		</div>
+	        	</div>
+	        	<div class="col">
+	        		<div class="form-group">
+	        			<label>Confirmar Contraseña</label>
+	        			<input type="password" class="form-control" id="pswC">
+	        		</div>
+	        	</div>
+        	</div>
+        	<div class="row">
+        		<div class="col">
+        			<button class="btn btn-primary" onclick="change_password()">Guardar</button>
+        		</div>
+        	</div>
         </div>
       </div>
     </div>
@@ -147,95 +165,3 @@
     </div>
   </div>
 </div>
-
-<div class="modal fade bd-example-modal-lg" id="modal_update">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<form method="POST" enctype="multipart/form-data" id="myform">
-	        <div class="row">
-			    <div class="col-md-6">
-			      <div class="form-group">
-			      	<label>Nombre</label>
-			        <input type="text" class="form-control" id="edit-name" placeholder="Nombre">
-			        <input type="hidden" id="id_user">
-			      </div>
-			    </div>
-			    <div class="col-md-6">
-			      <div class="form-group">
-			      	<label>Usuario</label>
-			        <input type="text" placeholder="Usuario" class="form-control" id="edit-user" />
-			      </div>
-			    </div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-			      <div class="form-group">
-			      	<label>Rol</label>
-			      	<select class="form-control" id="edit-slcrol">
-			      		<option value="">//</option>
-			      		<?php foreach ($roles as $key => $value) { ?>
-			      			<option value="<?= $value->id_roles ?>"><?= $value->description ?> </option>
-			      		<?php } ?>
-			      	</select>
-			      </div>
-			    </div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<label>Foto</label>
-					<div class="custom-file">
-				        <input type="file" class="custom-file-input" id="edit-customFileLang" name="edit-customFileLang" lang="en" accept="image/*">
-				        <label class="custom-file-label" for="edit-customFileLang">Seleccionar Imagen</label>
-				    </div>
-				</div>
-			</div>
-		</form>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="Update()">Guardar</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- <div class="modal fade bd-example-modal-lg" id="modal_update">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-		    <div class="col-md-12">
-		      <div class="form-group">
-		      	<label>Rol</label>
-		        <input type="text" class="form-control" id="edit-name" placeholder="Nombre">
-		      </div>
-		    </div>
-		</div>
-
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="Update()">Guardar</button>
-      </div>
-
-    </div>
-  </div>
-</div> -->

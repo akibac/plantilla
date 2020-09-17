@@ -126,6 +126,8 @@ class M_Main extends VS_Model {
                 'NameUser' => $reg->name,
                 'IdRol' => $reg->rol,
                 'Rol' => $reg->description,
+                'User' => $reg->user,
+                'img_pro'   => $reg->img_profile
             );
             $this->session->set_userdata($newdata);
             return "OK";

@@ -15,8 +15,8 @@ class C_Main extends Controller {
         }else{
             //$this->load->library('Googleplus');
             //Create Google Btn
-            // $contents['login_url'] = $this->googleplus->loginURL();
-            // $this->load->view('Login/V_Login',$contents);
+            //$contents['login_url'] = $this->googleplus->loginURL();
+            $this->load->view('Login/V_Login');
         }
     }
     

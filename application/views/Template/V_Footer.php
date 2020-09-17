@@ -1,6 +1,8 @@
 
 </div>
-
+<script type="text/javascript">
+    var url = "<?= base_url() ?>";
+</script>
 <!-- Argon Scripts -->
 <!-- Core -->
 <script src="<?= base_url() ?>dist/argon/assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -50,9 +52,8 @@ endif;
     endif;
 ?>        
 <script>
-    var url = "<?= base_url() ?>";
     $(document).ready(function () {
-
+        var url = "<?= base_url() ?>";
         $('.treeview-animated').mdbTreeview();
 
         $("#menu-toggle").click(function(e) {

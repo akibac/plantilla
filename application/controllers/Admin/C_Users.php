@@ -29,6 +29,14 @@ class C_Users extends Controller {
 
     function Save(){
         $data = $this->M_Users->save();
+        // if ($this->input->post('img') == "") {
+        //     $location = $_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/'.$data;
+        //     $tmp = $_SERVER['DOCUMENT_ROOT'].'team-4.jpg';
+        //     if (!file_exists($location)) {
+        //         mkdir($location, 0777, true);
+        //     }
+        //     move_uploaded_file($tmp,$location.'/team-4.jpg');
+        // }
         echo json_encode($data);
     }
 
@@ -42,6 +50,27 @@ class C_Users extends Controller {
         echo json_encode($data);
     }
 
+    function Upload_img(){
+        $this->M_Users->update_img();
+        $name = $this->input->post('name');
+        $location = $_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/'.$this->input->post('id_user');
+        if (!file_exists($location)) {
+            mkdir($location, 0777, true);
+        }else{
+            $files = glob($_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/'.$this->input->post('id_user').'/*'); // get all file names
+            foreach($files as $file){ // iterate files
+              if(is_file($file))
+                unlink($file); // delete file
+            }
+        }
+        if(move_uploaded_file($_FILES[$name]['tmp_name'],$location.'/'.$_FILES[$name]['name'])){
+            echo json_encode($location);
+        }else{
+            echo json_encode("error");
+        }
+        // $filename = $_FILES['customFileLang']['name'];
+    }
+
     function Delete(){
         $data = $this->M_Users->delete();
         echo json_encode($data);
@@ -50,6 +79,57 @@ class C_Users extends Controller {
     function Content(){
         $data['data'] = $this->M_Users->get_users();
         $data['table'] = $this->load->view('Admin/V_Table_User', $data, true);
+        echo json_encode($data);
+    }
+
+    function detail_user(){
+        if ($this->session->has_userdata('IdRol')) {
+            $array['menus'] = $this->M_Main->ListMenu();
+            $Header['menu'] = $this->load->view('Template/Menu/V_Menu', $array, true);
+            $Header['array_css'] = array(SWEETALERT_CSS);
+            $Header['title'] = "Detalle Usuario";
+            $this->load->view('Template/V_Header', $Header);
+
+            $data['data'] = $this->M_Users->get_user_detail();
+            $data['content'] = $this->load->view('Admin/V_Content_Users_Detail',$data,true);
+            $this->load->view('Admin/V_Users_Detail',$data);
+
+            $Footer['sidebar_tabs'] = $this->load->view('Template/V_sidebar_tabs', null, true);
+            $Footer['array_js'] = array(SWEETALERT_JS,'js/users.js');
+            $this->load->view('Template/V_Footer', $Footer);
+        }else{
+            $this->load->view('Login/V_Login');
+        }
+    }
+
+    function Content_edit(){
+        $data['data'] = $this->M_Users->get_user_detail();
+        $data['content'] = $this->load->view('Admin/V_Content_Users_Detail', $data, true);
+        echo json_encode($data);
+    }
+
+    function Settings(){
+        if ($this->session->has_userdata('IdRol')) {
+            $array['menus'] = $this->M_Main->ListMenu();
+            $Header['menu'] = $this->load->view('Template/Menu/V_Menu', $array, true);
+            $Header['array_css'] = array(SWEETALERT_CSS);
+            $Header['title'] = "Configuración";
+            $this->load->view('Template/V_Header', $Header);
+
+            $data['data'] = $this->M_Users->get_user_detail();
+            //$data['content'] = $this->load->view('Admin/V_Content_Settings',$data,true);
+            $this->load->view('Admin/V_Settings',$data);
+
+            $Footer['sidebar_tabs'] = $this->load->view('Template/V_sidebar_tabs', null, true);
+            $Footer['array_js'] = array(SWEETALERT_JS,'js/users.js');
+            $this->load->view('Template/V_Footer', $Footer);
+        }else{
+            $this->load->view('Login/V_Login');
+        }
+    }
+
+    function change_password(){
+        $data = $this->M_Users->change_password();
         echo json_encode($data);
     }
 }

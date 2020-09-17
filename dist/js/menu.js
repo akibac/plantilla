@@ -151,7 +151,7 @@ function Update(){
 	}
 }
 
-function Delete(id_menu,type){
+function Delete(id_menu,typem){
 	swal({
         title: 'Desea eliminar este registro?',
         text: "",
@@ -161,7 +161,7 @@ function Delete(id_menu,type){
         cancelButtonColor: '#d33',
         confirmButtonText: 'Aceptar!'
     }).then((result) => {
-        if (result == true && type == "2") {
+        if (result == true && (typem == "2" || typem == "1")) {
             $.ajax({
 		        url:  "C_Menu/Delete",
 		        type: 'POST',
@@ -174,6 +174,7 @@ function Delete(id_menu,type){
 	                    text: 'Registro Eliminado'
 	                });
 		            Content();
+		            location.reload();
 		        }
 		    });
         }else{

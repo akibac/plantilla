@@ -150,21 +150,15 @@ CREATE TABLE `sys_menu` (
   KEY `FK_menu_tipo_menu` (`type`) USING BTREE,
   CONSTRAINT `sys_menu_ibfk_1` FOREIGN KEY (`status`) REFERENCES `sys_status` (`id_status`),
   CONSTRAINT `sys_menu_ibfk_2` FOREIGN KEY (`type`) REFERENCES `sys_type_menu` (`id_type_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_menu` */
 
 insert  into `sys_menu`(`id_menu`,`title`,`type`,`url`,`icon`,`root`,`status`,`last_update`,`modified_by`) values 
 (1,'Administracion General',3,'Admin',1,1,1,'2020-09-07 13:25:50',1),
 (2,'Menu',2,'Admin/C_Menu',63,1,1,'2020-09-07 13:26:52',1),
-(8,'Prueba',2,'Prueba/C_Prueba',10,1,1,'2020-09-08 14:52:43',NULL),
-(13,'final',3,'Prueba/C_Pruebafff',77,13,1,'2020-09-08 16:21:16',NULL),
-(14,'Date',4,'Prueba/C_Pruebadate',9,13,1,'2020-09-08 16:21:58',1),
-(15,'resister',2,'Prueba/C_Pruebaresister',13,14,1,'2020-09-08 16:42:11',NULL),
-(16,'DateSub',2,'Prueba/C_PruebaDAtesb',100,14,1,'2020-09-09 08:12:49',NULL),
-(18,'Usuarios',2,'Admin/C_Users',38,1,1,'2020-09-09 09:03:56',1),
-(19,'Prueba',1,'Prueba/C_Prueba',100,19,1,'2020-09-10 12:08:07',NULL),
-(20,'date A live',1,'date/live',98,20,1,'2020-09-11 08:32:10',NULL);
+(13,'final',2,'Prueba/C_Pruebafff',77,13,1,'2020-09-08 16:21:16',NULL),
+(18,'Usuarios',2,'Admin/C_Users',38,1,1,'2020-09-09 09:03:56',1);
 
 /*Table structure for table `sys_roles` */
 
@@ -200,27 +194,16 @@ CREATE TABLE `sys_roles_menu` (
   KEY `FK_roles_menu_menu` (`id_menu`) USING BTREE,
   CONSTRAINT `sys_roles_menu_ibfk_2` FOREIGN KEY (`id_roles`) REFERENCES `sys_roles` (`id_roles`),
   CONSTRAINT `sys_roles_menu_ibfk_3` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_roles_menu` */
 
 insert  into `sys_roles_menu`(`id_roles_menu`,`id_roles`,`id_menu`) values 
 (1,1,1),
 (57,1,2),
-(10,1,8),
 (17,1,13),
-(49,1,14),
-(20,1,15),
-(47,1,16),
 (59,1,18),
-(60,1,19),
-(62,1,20),
-(11,2,8),
-(18,2,13),
-(50,2,14),
-(48,2,16),
-(61,2,19),
-(63,2,20);
+(18,2,13);
 
 /*Table structure for table `sys_status` */
 
@@ -265,6 +248,7 @@ CREATE TABLE `sys_users` (
   `name` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `user` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `password` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `img_profile` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `rol` int(11) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
   `last_entry` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -273,15 +257,14 @@ CREATE TABLE `sys_users` (
   KEY `rol` (`rol`),
   CONSTRAINT `sys_users_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `sys_status` (`id_status`),
   CONSTRAINT `sys_users_ibfk_2` FOREIGN KEY (`rol`) REFERENCES `sys_roles` (`id_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_users` */
 
-insert  into `sys_users`(`id_users`,`name`,`user`,`password`,`rol`,`id_status`,`last_entry`) values 
-(1,'Ivan Contreras','Ivanc','383b040d407308374fb758b48c10fbf3',1,1,'2020-09-16 22:24:10'),
-(6,'prueba','prueba','53580d4a0343209a5a6725d8453012bb',2,1,'2020-09-10 12:10:24'),
-(7,'standar','standar','4d62a5c43432ecf85e830b559cb85577',2,1,'2020-09-11 09:23:02'),
-(8,'admin','admin','f06785e03684763f1238b1451792724f',1,1,'2020-09-16 22:25:58');
+insert  into `sys_users`(`id_users`,`name`,`user`,`password`,`img_profile`,`rol`,`id_status`,`last_entry`) values 
+(1,'Ivan Contreras','Ivanc','383b040d407308374fb758b48c10fbf3','pp.jfif',1,1,'2020-09-17 13:20:32'),
+(8,'admin','admin','1cb9816ba134a8d56403a79ccda403eb','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-17 13:26:14'),
+(38,'pb','prueba','9612ac3f0c338032c9c3888c634f3216','EYj3o92UcAA5x-D.jfif',2,1,'2020-09-17 12:21:52');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

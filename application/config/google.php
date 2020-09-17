@@ -12,7 +12,7 @@
 */
 $config['google']['client_id']        = '409246025063-m5aep518fgtc21l8ma9f2bigi0g9a670.apps.googleusercontent.com';
 $config['google']['client_secret']    = '4fZRSY-l_Rmexo9Osh8iNvHz';
-$config['google']['redirect_uri']     = 'http://localhost/VisionCenter/C_Main/LoginToGoogle/';
-$config['google']['application_name'] = 'Vision Center Pro';
+$config['google']['redirect_uri']     = 'http://localhost/plantilla/C_Main/LoginToGoogle/';
+$config['google']['application_name'] = 'Plantilla';
 $config['google']['api_key']          = '';
 $config['google']['scopes']           = array();

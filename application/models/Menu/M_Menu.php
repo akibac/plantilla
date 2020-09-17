@@ -165,6 +165,7 @@ class M_Menu extends VS_Model {
         $this->db->delete("sys_roles_menu");
 
         $this->db->where("id_menu",$this->id_menu);
-        return $this->db->delete("sys_menu");
+        $this->db->delete("sys_menu");
+        return $this->update_all_menu();
     }
 }
