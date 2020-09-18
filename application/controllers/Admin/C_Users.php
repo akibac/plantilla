@@ -132,4 +132,46 @@ class C_Users extends Controller {
         $data = $this->M_Users->change_password();
         echo json_encode($data);
     }
+
+    function Rol_Users(){
+        $array['menus'] = $this->M_Main->ListMenu();
+        $Header['menu'] = $this->load->view('Template/Menu/V_Menu', $array, true);
+        $Header['array_css'] = array(SWEETALERT_CSS);
+        $Header['title'] = "Roles de Usuario";
+        $this->load->view('Template/V_Header', $Header);
+
+        $data['roles'] = $this->M_Users->get_roles();
+        $data['table'] = $this->load->view('Admin/V_Table_Rol', $data, true);
+        $this->load->view('Admin/V_Roles',$data);
+
+        $Footer['sidebar_tabs'] = $this->load->view('Template/V_sidebar_tabs', null, true);
+        $Footer['array_js'] = array(SWEETALERT_JS,'js/users.js');
+        $this->load->view('Template/V_Footer', $Footer);
+    }
+
+    function Save_Rol(){
+        $data = $this->M_Users->save_rol();
+        echo json_encode($data);
+    }
+
+    function Content_rol(){
+        $data['roles'] = $this->M_Users->get_roles();
+        $data['table'] = $this->load->view('Admin/V_Table_Rol', $data, true);
+        echo json_encode($data);
+    }
+
+    function data_update_rol(){
+        $data = $this->M_Users->data_update_rol();
+        echo json_encode($data);
+    }
+
+    function Update_Rol(){
+        $data = $this->M_Users->update_rol();
+        echo json_encode($data);
+    }
+
+    function DeleteRol(){
+        $data = $this->M_Users->delete_rol();
+        echo json_encode($data);
+    }
 }

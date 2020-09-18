@@ -31,6 +31,7 @@ function Save(){
                 });
                 Content();
                 $("#modal_add").modal("hide");
+                location.reload();
 	        }
 	    });
 	}
@@ -146,6 +147,7 @@ function Update(){
                 });
 	            Content();
 	            $("#modal_edit").modal("hide");
+	            location.reload();
 	        }
 	    });
 	}
@@ -195,6 +197,7 @@ function Content(){
         success: function(data){
             var datos = JSON.parse(data);
             $("#content").html(datos.table);
+            $('#table_menu').DataTable();
         }
     });
 }

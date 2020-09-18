@@ -176,6 +176,21 @@
 			</div>
 
 			<div class="row">
+				<div class="col-md-6">
+			      <div class="form-group">
+			      	<label>Contraseña</label>
+			        <input type="password" placeholder="Contraseña" class="form-control" id="edit-pass" />
+			      </div>
+			    </div>
+			    <div class="col-md-6">
+			      <div class="form-group">
+			      	<label>Confirme Contraseña</label>
+			        <input type="password" placeholder="Contraseña" class="form-control" id="edit-passConfirm" />
+			      </div>
+			    </div>
+			</div>
+
+			<div class="row">
 				<div class="col-md-12">
 			      <div class="form-group">
 			      	<label>Rol</label>

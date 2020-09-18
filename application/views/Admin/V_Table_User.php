@@ -1,4 +1,4 @@
-<table class="table table-flush" id="table_menu">
+<table class="table table-flush" id="table_U">
 	<thead class="thead-light">
 	  <tr>
 	    <th scope="col">Nombre</th>

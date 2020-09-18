@@ -21,7 +21,7 @@
         <!-- SWEET ALERT -->
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>dist/<?= SWEETALERT_CSS ?>">
         <link rel="stylesheet" href="<?= base_url() ?>dist/argon/assets/vendor/select2/dist/css/select2.min.css">
-        
+        <link rel="stylesheet" href="<?= base_url() ?>dist/css/pb.css">
 
         
     </head>
@@ -57,7 +57,7 @@
                 <span class="docs-normal"></span>
               </h6>
               <!-- Navigation -->
-              <ul class="navbar-nav mb-md-3">
+              <ul class="navbar-nav mb-md-3" id="btn-closeM">
                 
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="closep">

@@ -18,7 +18,7 @@ class M_Users extends VS_Model {
     }
 
     function get_roles(){
-    	$query = ("SELECT * FROM sys_roles");
+    	$query = ("SELECT r.*, s.description as status_name FROM sys_roles r INNER JOIN sys_status s ON r.status = s.id_status");
         $result = $this->db->query($query);
         return $result->result();
     }
@@ -45,6 +45,7 @@ class M_Users extends VS_Model {
     	$data = array(
 		    "name"	=> $this->name,
 		    "user"	=> $this->user,
+            "password"  => md5('07'.$this->pass),
 		    "rol" => $this->rol
 		);
 		$this->db->where("id_users",$this->id_user);
@@ -81,5 +82,36 @@ class M_Users extends VS_Model {
         );
         $this->db->where("id_users",$this->session->IdUser);
         return $this->db->update("sys_users",$data);
+    }
+
+    function save_rol(){
+        $data = array(
+            "description"   => $this->rol,
+            "status"        => $this->state_id,
+            "modified_by"   => $this->session->IdUser
+        );
+        $this->db->insert("sys_roles",$data);
+        return $this->db->insert_id();
+    }
+
+    function data_update_rol(){
+        $query = ("SELECT * FROM sys_roles WHERE id_roles = $this->id_rol");
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
+    function update_rol(){
+        $data = array(
+            "description"   => $this->rol,
+            "status"        => $this->state_id,
+            "modified_by"   => $this->session->IdUser
+        );
+        $this->db->where("id_roles",$this->id_rol);
+        return $this->db->update("sys_roles",$data);
+    }
+
+    function delete_rol(){
+        $this->db->where("id_roles",$this->id_rol);
+        return $this->db->delete("sys_roles");
     }
 }

@@ -86,6 +86,7 @@ endif;
             $('body').removeClass('g-sidenav-pinned');
             $('body').removeClass('nav-open');
             $('body').removeClass('g-sidenav-show').addClass('g-sidenav-hidden');
+            $('body').addClass('g-sidenav-hidden');
         });
 
     });
