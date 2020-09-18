@@ -14,6 +14,7 @@
         </div>
         <div class="col-lg-6 col-5 text-right">
           <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target=".bd-example-modal-lg">Nuevo</a>
+          <a href="#" class="btn btn-sm btn-neutral" onclick="modal_logo()">Nuevo Logo</a>
         </div>
       </div>
       <!-- Card stats -->
@@ -250,5 +251,37 @@
 
     </div>
 
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modal_logo">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Logo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form method="POST" enctype="multipart/form-data" id="myform">
+			<div class="row">
+				<div class="col-md-12">
+					<label>Foto</label>
+					<div class="custom-file">
+				        <input type="file" class="custom-file-input" id="edit-logo" name="edit-logo" lang="en" accept="image/png">
+				        <label class="custom-file-label" for="edit-logo">Seleccionar Imagen</label>
+				    </div>
+				</div>
+			</div>
+		</form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="Update_Logo()">Guardar</button>
+      </div>
+
+    </div>
   </div>
 </div>

@@ -150,15 +150,16 @@ CREATE TABLE `sys_menu` (
   KEY `FK_menu_tipo_menu` (`type`) USING BTREE,
   CONSTRAINT `sys_menu_ibfk_1` FOREIGN KEY (`status`) REFERENCES `sys_status` (`id_status`),
   CONSTRAINT `sys_menu_ibfk_2` FOREIGN KEY (`type`) REFERENCES `sys_type_menu` (`id_type_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_menu` */
 
 insert  into `sys_menu`(`id_menu`,`title`,`type`,`url`,`icon`,`root`,`status`,`last_update`,`modified_by`) values 
 (1,'Administracion General',3,'Admin',1,1,1,'2020-09-07 13:25:50',1),
 (2,'Menu',2,'Admin/C_Menu',63,1,1,'2020-09-07 13:26:52',1),
-(13,'final',2,'Prueba/C_Pruebafff',77,13,1,'2020-09-08 16:21:16',NULL),
-(18,'Usuarios',2,'Admin/C_Users',38,1,1,'2020-09-09 09:03:56',1);
+(18,'Usuarios',2,'Admin/C_Users',38,1,1,'2020-09-09 09:03:56',1),
+(22,'Roles Usuario',2,'Admin/C_Users/Rol_Users',2,1,1,'2020-09-17 17:09:07',8),
+(25,'Prueba',2,'Prueba/C_Prueba',12,25,1,'2020-09-18 14:14:45',NULL);
 
 /*Table structure for table `sys_roles` */
 
@@ -173,13 +174,14 @@ CREATE TABLE `sys_roles` (
   PRIMARY KEY (`id_roles`),
   KEY `FK_roles_status` (`status`),
   CONSTRAINT `FK_roles_status` FOREIGN KEY (`status`) REFERENCES `sys_status` (`id_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_roles` */
 
 insert  into `sys_roles`(`id_roles`,`description`,`status`,`last_update`,`modified_by`) values 
 (1,'Web Developer',1,'2020-09-04 17:23:01',1),
-(2,'Standar',1,'2020-09-08 14:08:03',1);
+(2,'Standar',1,'2020-09-08 14:08:03',1),
+(7,'Prueba',2,NULL,8);
 
 /*Table structure for table `sys_roles_menu` */
 
@@ -194,16 +196,17 @@ CREATE TABLE `sys_roles_menu` (
   KEY `FK_roles_menu_menu` (`id_menu`) USING BTREE,
   CONSTRAINT `sys_roles_menu_ibfk_2` FOREIGN KEY (`id_roles`) REFERENCES `sys_roles` (`id_roles`),
   CONSTRAINT `sys_roles_menu_ibfk_3` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_roles_menu` */
 
 insert  into `sys_roles_menu`(`id_roles_menu`,`id_roles`,`id_menu`) values 
 (1,1,1),
 (57,1,2),
-(17,1,13),
 (59,1,18),
-(18,2,13);
+(72,1,22),
+(69,1,25),
+(70,2,25);
 
 /*Table structure for table `sys_status` */
 
@@ -262,9 +265,8 @@ CREATE TABLE `sys_users` (
 /*Data for the table `sys_users` */
 
 insert  into `sys_users`(`id_users`,`name`,`user`,`password`,`img_profile`,`rol`,`id_status`,`last_entry`) values 
-(1,'Ivan Contreras','Ivanc','383b040d407308374fb758b48c10fbf3','pp.jfif',1,1,'2020-09-17 13:20:32'),
-(8,'admin','admin','1cb9816ba134a8d56403a79ccda403eb','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-17 13:26:14'),
-(38,'pb','prueba','9612ac3f0c338032c9c3888c634f3216','EYj3o92UcAA5x-D.jfif',2,1,'2020-09-17 12:21:52');
+(1,'Ivan Contreras','Ivanc','d72d187df41e10ea7d9fcdc7f5909205','EYj3o92UcAA5x-D.jfif',1,1,'2020-09-17 17:05:38'),
+(8,'admin','admin','1cb9816ba134a8d56403a79ccda403eb','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-18 16:38:52');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

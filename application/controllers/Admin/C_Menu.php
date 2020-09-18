@@ -44,6 +44,15 @@ class C_Menu extends Controller {
         echo json_encode($data);
     }
 
+    function get_rol_relations(){
+        $data = $this->M_Menu->get_rol_relations();
+        $array = array();
+        foreach ($data as $key => $value) {
+            $array[] = $value->id_roles;
+        }
+        echo json_encode($array);
+    }
+
     function Update(){
         $data = $this->M_Menu->update_menu();
         echo json_encode($data);
@@ -58,5 +67,23 @@ class C_Menu extends Controller {
         $data['data']   = $this->M_Menu->data_menu();
         $data['table']  = $this->load->view('Admin/V_Table_Menu', $data, true);
         echo json_encode($data);
+    }
+
+    function Upload_Logo(){
+        $location = $_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/logo';
+        if (!file_exists($location)) {
+            mkdir($location, 0777, true);
+        }else{
+            $files = glob($_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/logo/*'); // get all file names
+            foreach($files as $file){ // iterate files
+              if(is_file($file))
+                unlink($file); // delete file
+            }
+        }
+        if(move_uploaded_file($_FILES['edit-logo']['tmp_name'],$location.'/logo.png')){
+            echo json_encode($location);
+        }else{
+            echo json_encode("error");
+        }
     }
 }

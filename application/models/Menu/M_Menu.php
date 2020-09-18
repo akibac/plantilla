@@ -85,6 +85,12 @@ class M_Menu extends VS_Model {
         return $result->result();
     }
 
+    function get_rol_relations(){
+        $query = ("SELECT * FROM sys_roles_menu r INNER JOIN sys_roles s ON r.id_roles = s.id_roles WHERE r.id_menu = $this->id_menu");
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
     function update_menu(){
     	if ($this->type == "1") {
     		$data = array(
