@@ -161,7 +161,6 @@
   </div>
 </div>
 
-
 <div class="modal fade bd-example-modal-lg" id="modal_edit">
   <div class="modal-dialog modal-lg">
    	<div class="modal-content">

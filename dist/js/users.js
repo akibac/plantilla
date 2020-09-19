@@ -101,7 +101,6 @@ function Update(){
             text: 'Ingrese todos los campos'
         });
 	}else{
-		 
 		if (pass != passConfirm) {
 			swal({
 	            type: 'error',

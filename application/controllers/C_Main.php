@@ -8,8 +8,6 @@ class C_Main extends Controller {
     }
 
     public function index(){
-        //$get_remember = $this->M_Main->get_remember($this->input->ip_address());
-        //print_r($this->session);
         if ($this->session->has_userdata('IdRol')) {
             header('Location: ' . base_url()."C_Panel");
         }else{

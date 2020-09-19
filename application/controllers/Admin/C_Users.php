@@ -58,7 +58,7 @@ class C_Users extends Controller {
             mkdir($location, 0777, true);
         }else{
             $files = glob($_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/'.$this->input->post('id_user').'/*'); // get all file names
-            foreach($files as $file){ // iterate files
+            foreach($files as $file){
               if(is_file($file))
                 unlink($file); // delete file
             }

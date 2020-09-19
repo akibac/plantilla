@@ -111,7 +111,6 @@ class M_Main extends VS_Model {
                 ->join("sys_roles r","u.rol = r.id_roles")
                 ->where("u.id_status", 1)
                 ->get();
-        //echo $this->db->last_query();
         $reg = $result->row();
         if ($result->num_rows() > 0 && password_verify(md5('07'.$this->input->post("psw")), $reg->password)) {
             
@@ -129,7 +128,6 @@ class M_Main extends VS_Model {
             );
             $this->session->set_userdata($newdata);
             return "OK";
-            
         } else {
             return "ERROR";
         }

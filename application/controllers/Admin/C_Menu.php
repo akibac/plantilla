@@ -75,7 +75,7 @@ class C_Menu extends Controller {
             mkdir($location, 0777, true);
         }else{
             $files = glob($_SERVER['DOCUMENT_ROOT'] .'/plantilla/dist/profile/logo/*'); // get all file names
-            foreach($files as $file){ // iterate files
+            foreach($files as $file){ //iterate files
               if(is_file($file))
                 unlink($file); // delete file
             }

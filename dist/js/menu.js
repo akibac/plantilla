@@ -38,7 +38,7 @@ function Save(){
 	
 }
 
-function type_menu(){
+function type_menu(){//
 	$('#ft').empty();
 	$('#ft').append(`<option value="0"> // </option>`);
 	var type = $("#slctype").val();

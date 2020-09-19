@@ -32,7 +32,7 @@ class M_Users extends VS_Model {
             "id_status"	=> '1'
         );
         $this->db->insert("sys_users",$data);
-        return $this->db->insert_id();
+        return $this->db->insert_id();//
     }
 
     function get_data_user(){

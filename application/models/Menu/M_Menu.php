@@ -116,7 +116,7 @@ class M_Menu extends VS_Model {
     }
 
     function update_menu(){
-    	if ($this->type_slt == "1" || $this->type_slt == "3") {
+    	if ($this->type_slt == "1" || $this->type_slt == "3") {//
     		$data = array(
     			"title"	=> $this->title,
     			"type"	=> $this->type_slt,
@@ -146,8 +146,8 @@ class M_Menu extends VS_Model {
         $this->db->delete("sys_roles_menu");
 
         $roles = $this->roles;
-		if (count($this->roles) > 0) {
-        	for ($i=0; $i < count($this->roles); $i++) { 
+		if (count($this->roles) > 0) {//
+        	for ($i=0; $i < count($this->roles); $i++) {
 	        	$data = array(
 		            "id_roles"	=> $roles[$i],
 		            "id_menu"	=> $this->id_menu

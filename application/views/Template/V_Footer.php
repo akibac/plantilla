@@ -29,7 +29,6 @@
 
 <script src="<?= base_url() ?>dist/argon/assets/vendor/select2/dist/js/select2.min.js"></script>
 
-
 <?php
 if (isset($array_js)):
     foreach ($array_js as $js):

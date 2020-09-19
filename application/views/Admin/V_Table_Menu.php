@@ -9,6 +9,7 @@
 	  </tr>
 	</thead>
 	<tbody>
+
 		<?php foreach ($data as $key => $value) { ?>
 			<tr>
 				<th scope="row">
@@ -33,5 +34,6 @@
 			    </td>
 			</tr>
 		<?php } ?>
+		
 	</tbody>
 </table>
