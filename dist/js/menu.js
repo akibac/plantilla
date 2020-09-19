@@ -11,7 +11,7 @@ function Save(){
 	var father = $("#ft").val();
 	var icon = $("#icn").val();
 	var roles = $("#pga").val();
-	if (title == "" || url == "" || type == "" || father == "" || icon == "") {
+	if (title == "" || url == "" || type == "" || father == "" || icon == "" || roles.length == 0) {
 		swal({
             type: 'error',
             title: 'Atención',
@@ -80,6 +80,32 @@ function type_menu2(){
 	}
 }
 
+function type_menu_selected(root){
+	$('#edit-ft').empty();
+	$('#edit-ft').append(`<option value="0"> // </option>`);
+	var type = $("#edit-slctype").val();
+	if (type == "2" || type == "4") {
+		$.ajax({
+	        url:  "C_Menu/get_menu",
+	        type: 'POST',
+	        data: {type:type},
+	        success: function(data){
+	            var datos = JSON.parse(data);
+	            datos.forEach(function(element){
+	            	if (root == element.id_menu) {
+	            		var selected = "selected";
+	            	}else{
+	            		var selected = "";
+	            	}
+	            	$('#edit-ft').append('<option value="'+element.id_menu+'" '+selected+'> '+element.title+' </option>'); 
+	            });
+	        }
+	    });
+	}else{
+		$('#edit-ft').append(`<option value="0" selected> Raiz </option>`); 
+	}
+}
+
 function iconChange(){
 	$("#icon_flex").removeAttr('class');
 	$("#icon_flex").attr('class', '');
@@ -98,6 +124,19 @@ function iconChange2(){
 	$("#edit-icon_flex").addClass('ni ni-'+text);
 }
 
+function rol_relation(id_menu){
+	$.ajax({
+        url:  "C_Menu/get_rol_relations",
+        type: 'POST',
+        data: {id_menu:id_menu},
+        success: function(data){
+            var datos = JSON.parse(data);
+            $('#edit-pga').val(datos);
+			$('#edit-pga').trigger('change'); // Notify any JS components that the value changed
+        }
+    });
+}
+
 function Modal_Update(id_menu){
 	$.ajax({
         url:  "C_Menu/get_data_edit",
@@ -109,10 +148,15 @@ function Modal_Update(id_menu){
             datos.forEach(function(element){
             	$("#edit-title").val(element.title);
             	$("#edit-url").val(element.url);
+            	$("#edit-slctype option[value='"+element.type+"']").attr("selected", true);
+            	$("#edit-icn option[value='"+element.type+"']").attr("selected", true);
             	$("#modal_edit").modal("show");
+            	type_menu_selected(element.root);
+            	iconChange2();
+            	rol_relation(id_menu);
             });
             $("#id_menu").val(id_menu);
-            
+
         }
     });
 	
@@ -126,7 +170,7 @@ function Update(){
 	var icon = $("#edit-icn").val();
 	var roles = $("#edit-pga").val();
 	var id_menu = $("#id_menu").val();
-	if (title == "" || url == "" || type == "" || father == "" || icon == "") {
+	if (title == "" || url == "" || type == "" || father == "" || icon == "" || roles.length == 0) {
 		swal({
             type: 'error',
             title: 'Atención',
@@ -198,6 +242,32 @@ function Content(){
             var datos = JSON.parse(data);
             $("#content").html(datos.table);
             $('#table_menu').DataTable();
+        }
+    });
+}
+
+function modal_logo(){
+	$("#modal_logo").modal("show");
+}
+
+function Update_Logo(){
+	var fd = new FormData();
+    var files = $('#edit-logo')[0].files[0];
+    fd.append('edit-logo',files);
+	$.ajax({
+        url:  url+"Admin/C_Menu/Upload_Logo",
+        type: 'POST',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            $("#modal_logo").modal("hide");
+            swal({
+                type: 'success',
+                title: 'OK',
+                text: 'Logo Actualizado'
+            });
+            location.reload();
         }
     });
 }

@@ -58,6 +58,7 @@ function Modal_Update(id_user){
             	$("#edit-user").val(element.user);
             	$("#edit-pass").val(element.password);
             	$("#edit-passConfirm").val(element.password);
+            	$("#edit-slcrol option[value='"+element.rol+"']").attr("selected", true);
             	$("#id_user").val(id_user);
             	$("#modal_update").modal("show");
             });
@@ -317,6 +318,7 @@ function Modal_Update_Rol(id_rol){
             datos.forEach(function(element){
             	$("#edit-rol").val(element.description);
             	$("#id_rol").val(id_rol);
+            	$("#edit-state option[value='"+element.status+"']").attr("selected", true);
             	$("#modal_edit").modal("show");
             });
             
