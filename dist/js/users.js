@@ -56,8 +56,8 @@ function Modal_Update(id_user){
             datos.forEach(function(element){
             	$("#edit-name").val(element.name);
             	$("#edit-user").val(element.user);
-            	$("#edit-pass").val(element.password);
-            	$("#edit-passConfirm").val(element.password);
+            	// $("#edit-pass").val(element.password);
+            	// $("#edit-passConfirm").val(element.password);
             	$("#edit-slcrol option[value='"+element.rol+"']").attr("selected", true);
             	$("#id_user").val(id_user);
             	$("#modal_update").modal("show");
@@ -94,13 +94,14 @@ function Update(){
 	var passConfirm = $("#edit-passConfirm").val();
 
 	var id = "edit-customFileLang"; //id del input file
-	if (name == "" || user == "" || pass == "" || rol == "") {
+	if (name == "" || user == "" || rol == "") {
 		swal({
             type: 'error',
             title: 'Atención',
             text: 'Ingrese todos los campos'
         });
 	}else{
+		 
 		if (pass != passConfirm) {
 			swal({
 	            type: 'error',
@@ -128,6 +129,7 @@ function Update(){
 		        }
 		    });
 		}
+		
 	}
 }
 

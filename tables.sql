@@ -159,7 +159,7 @@ insert  into `sys_menu`(`id_menu`,`title`,`type`,`url`,`icon`,`root`,`status`,`l
 (2,'Menu',2,'Admin/C_Menu',63,1,1,'2020-09-07 13:26:52',1),
 (18,'Usuarios',2,'Admin/C_Users',38,1,1,'2020-09-09 09:03:56',1),
 (22,'Roles Usuario',2,'Admin/C_Users/Rol_Users',2,1,1,'2020-09-17 17:09:07',8),
-(25,'Prueba',2,'Prueba/C_Prueba',12,25,1,'2020-09-18 14:14:45',NULL);
+(25,'Prueba',2,'Prueba/C_Prueba',1,1,1,'2020-09-18 14:14:45',9);
 
 /*Table structure for table `sys_roles` */
 
@@ -196,7 +196,7 @@ CREATE TABLE `sys_roles_menu` (
   KEY `FK_roles_menu_menu` (`id_menu`) USING BTREE,
   CONSTRAINT `sys_roles_menu_ibfk_2` FOREIGN KEY (`id_roles`) REFERENCES `sys_roles` (`id_roles`),
   CONSTRAINT `sys_roles_menu_ibfk_3` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_roles_menu` */
 
@@ -205,8 +205,8 @@ insert  into `sys_roles_menu`(`id_roles_menu`,`id_roles`,`id_menu`) values
 (57,1,2),
 (59,1,18),
 (72,1,22),
-(69,1,25),
-(70,2,25);
+(111,1,25),
+(112,2,25);
 
 /*Table structure for table `sys_status` */
 
@@ -260,13 +260,14 @@ CREATE TABLE `sys_users` (
   KEY `rol` (`rol`),
   CONSTRAINT `sys_users_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `sys_status` (`id_status`),
   CONSTRAINT `sys_users_ibfk_2` FOREIGN KEY (`rol`) REFERENCES `sys_roles` (`id_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `sys_users` */
 
 insert  into `sys_users`(`id_users`,`name`,`user`,`password`,`img_profile`,`rol`,`id_status`,`last_entry`) values 
-(1,'Ivan Contreras','Ivanc','d72d187df41e10ea7d9fcdc7f5909205','EYj3o92UcAA5x-D.jfif',1,1,'2020-09-17 17:05:38'),
-(8,'admin','admin','1cb9816ba134a8d56403a79ccda403eb','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-18 16:38:52');
+(1,'Ivan Contreras','Ivanc','$argon2id$v=19$m=1024,t=2,p=2$RnZVLjBaNHpKbTNza1Y0Mg$Y9E3Ga52WW3kW2rSg1Se7cFFqBu10jWfEZHqpe/ta10','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-19 09:43:14'),
+(8,'admin','admin','$argon2id$v=19$m=1024,t=2,p=2$SURWeHZMLkVzb3I4Q2VyTQ$Ouxz6QIARPt0aa3lQxcyshi12v4yi3P7hV9PuD3j5EQ','c3dcd9804e19a6ed296548a2796a140d.jpg',1,1,'2020-09-19 09:44:05'),
+(9,'pb','prueba','$argon2id$v=19$m=1024,t=2,p=2$dmtnVTN0bGNJeHlMZmQwdw$tTzfq40uWPIqi6YN9H1Ick4pVbEt9g9jUSwcKRSH7+s','pp.jfif',1,1,'2020-09-19 09:44:49');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

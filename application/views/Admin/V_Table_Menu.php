@@ -12,22 +12,22 @@
 		<?php foreach ($data as $key => $value) { ?>
 			<tr>
 				<th scope="row">
-			    	<?=$value->title?>
+			    	<?=$value->name_child?>
 			    </th>
 			    <td>
-			    	<?=$value->url?>
+			    	<?=$value->url_child?>
 			    </td>
 			    <td>
-			    	<?=$value->description?>
+			    	<?=$value->description_child?>
 			    </td>
 			    <td>
-			    	<i class="ni ni-<?=$value->name?> text-success mr-3"></i>
+			    	<i class="ni ni-<?=$value->icon_child?> text-success mr-3"></i>
 			    </td>
 			    <td>
-			    	<button class="btn btn-icon btn-success" type="button" title="Editar" onclick="Modal_Update(<?=$value->id_menu?>)">
+			    	<button class="btn btn-icon btn-success" type="button" title="Editar" onclick="Modal_Update(<?=$value->id_menu_child?>)">
 						<span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
 					</button>
-					<button class="btn btn-icon btn-danger" type="button" title="Eliminar" onclick="Delete(<?=$value->id_menu?>,<?=$value->type?>)">
+					<button class="btn btn-icon btn-danger" type="button" title="Eliminar" onclick="Delete(<?=$value->id_menu_child?>,<?=$value->type_child?>)">
 						<span class="btn-inner--icon"><i class="ni ni-basket"></i></span>
 					</button>
 			    </td>

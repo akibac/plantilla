@@ -103,9 +103,7 @@ class M_Main extends VS_Model {
         if($data):
             $this->db->where("u.email", $data['email']);
         else:
-            // 07 antes de cualquier contraseña
             $this->db->where("u.user", $this->input->post("usr"));
-            $this->db->where("u.password", md5('07'.$this->input->post("psw")));
         endif;
         
         $result = $this->db->select("*")
@@ -114,9 +112,8 @@ class M_Main extends VS_Model {
                 ->where("u.id_status", 1)
                 ->get();
         //echo $this->db->last_query();
-
-        if ($result->num_rows() > 0) {
-            $reg = $result->row();
+        $reg = $result->row();
+        if ($result->num_rows() > 0 && password_verify(md5('07'.$this->input->post("psw")), $reg->password)) {
             
             $this->db->where("id_users",$reg->id_users);
             $this->db->update("sys_users",array("last_entry"=>date("Y-m-d H:i:s")));
@@ -127,7 +124,8 @@ class M_Main extends VS_Model {
                 'IdRol' => $reg->rol,
                 'Rol' => $reg->description,
                 'User' => $reg->user,
-                'img_pro'   => $reg->img_profile
+                'img_pro'   => $reg->img_profile,
+                'psw'   => $this->input->post("psw")
             );
             $this->session->set_userdata($newdata);
             return "OK";

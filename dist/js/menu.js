@@ -55,7 +55,7 @@ function type_menu(){
 	        }
 	    });
 	}else{
-		$('#ft').append(`<option value="0"> Raiz </option>`); 
+		$('#ft').append(`<option value="0" selected> Raiz </option>`);
 	}
 }
 
@@ -63,6 +63,7 @@ function type_menu2(){
 	$('#edit-ft').empty();
 	$('#edit-ft').append(`<option value="0"> // </option>`);
 	var type = $("#edit-slctype").val();
+	var id_menu = $("#id_menu").val();
 	if (type == "2" || type == "4") {
 		$.ajax({
 	        url:  "C_Menu/get_menu",
@@ -71,12 +72,14 @@ function type_menu2(){
 	        success: function(data){
 	            var datos = JSON.parse(data);
 	            datos.forEach(function(element){
-	            	$('#edit-ft').append('<option value="'+element.id_menu+'"> '+element.title+' </option>'); 
+	            	if (id_menu != element.id_menu) {
+	            		$('#edit-ft').append('<option value="'+element.id_menu+'"> '+element.title+' </option>');
+	            	} 
 	            });
 	        }
 	    });
 	}else{
-		$('#edit-ft').append(`<option value="0"> Raiz </option>`); 
+		$('#edit-ft').append(`<option value="0" selected> Raiz </option>`); 
 	}
 }
 
@@ -165,12 +168,13 @@ function Modal_Update(id_menu){
 function Update(){
 	var title = $("#edit-title").val();
 	var url = $("#edit-url").val();
-	var type = $("#edit-slctype").val();
+	var type_slt = $("#edit-slctype").val();
 	var father = $("#edit-ft").val();
 	var icon = $("#edit-icn").val();
 	var roles = $("#edit-pga").val();
 	var id_menu = $("#id_menu").val();
-	if (title == "" || url == "" || type == "" || father == "" || icon == "" || roles.length == 0) {
+	console.log(type_slt);
+	if (title == "" || url == "" || type_slt == "" || father == "" || icon == "" || roles.length == 0) {
 		swal({
             type: 'error',
             title: 'Atención',
@@ -180,10 +184,9 @@ function Update(){
 		$.ajax({
 	        url:  "C_Menu/Update",
 	        type: 'POST',
-	        data: {title:title,url:url,type:type,father:father,icon,icon,roles:roles,id_menu:id_menu},
+	        data: {title:title,url:url,type_slt:type_slt,father:father,icon,icon,roles:roles,id_menu:id_menu},
 	        success: function(data){
 	            var datos = JSON.parse(data);
-	            console.log(datos);
 	            swal({
                     type: 'success',
                     title: 'OK',

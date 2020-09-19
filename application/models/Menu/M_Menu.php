@@ -30,7 +30,31 @@ class M_Menu extends VS_Model {
     }
 
     function data_menu(){
-    	$query = ("SELECT * FROM sys_menu m JOIN sys_type_menu t ON m.type = t.id_type_menu JOIN sys_icons i ON m.icon = i.id_icon");
+    	$query = ("SELECT
+                    a.id_menu AS id_menu,
+                    b.id_menu AS id_menu_child,
+                    b.root AS id_menu_father,
+                    a.title AS name_main,
+                    b.title AS name_child,
+                    a.type AS main_type,
+                    b.type AS type_child,
+                    a.url AS url_main,
+                    b.url AS url_child,
+                    a.icon AS icon_main,
+                    b.icon AS icon_child,
+                    a.root AS id_menu_main,
+                    a.`status` AS status_main,
+                    b.`status` AS status_child,
+                    tm.description AS description_child,
+                    icn.`name` AS icon_child
+                    FROM
+                    sys_menu AS a
+                    INNER JOIN sys_menu AS b ON a.id_menu = b.root
+                    INNER JOIN sys_type_menu AS tm ON b.`type` = tm.`id_type_menu`
+                    INNER JOIN sys_icons AS icn ON b.`icon` = icn.`id_icon`
+                    ORDER BY
+                    id_menu ASC,
+                    id_menu_child ASC");
         $result = $this->db->query($query);
         return $result->result();	
     }
@@ -92,34 +116,26 @@ class M_Menu extends VS_Model {
     }
 
     function update_menu(){
-    	if ($this->type == "1") {
+    	if ($this->type_slt == "1" || $this->type_slt == "3") {
     		$data = array(
     			"title"	=> $this->title,
-    			"type"	=> $this->type,
+    			"type"	=> $this->type_slt,
     			"url"	=> $this->url,
     			"icon"	=> $this->icon,
 			    "root" => $this->id_menu,
 			    "modified_by"	=> $this->session->IdUser
 			);
     	}else{
-    		if ($this->type == "3") {
-    			$data = array(
-				    "title"	=> $this->title,
-	    			"type"	=> $this->type,
-	    			"url"	=> $this->url,
-	    			"icon"	=> $this->icon,
-				    "modified_by"	=> $this->session->IdUser
-				);
-    		}else{
-    			$data = array(
-				    "title"	=> $this->title,
-	    			"type"	=> $this->type,
-	    			"url"	=> $this->url,
-	    			"icon"	=> $this->icon,
-	    			"root" => $this->father,
-				    "modified_by"	=> $this->session->IdUser
-				);
-    		}
+    		
+			$data = array(
+			    "title"	=> $this->title,
+    			"type"	=> $this->type_slt,
+    			"url"	=> $this->url,
+    			"icon"	=> $this->icon,
+    			"root" => $this->father,
+			    "modified_by"	=> $this->session->IdUser
+			);
+    		
     		
     	}
 
@@ -141,7 +157,12 @@ class M_Menu extends VS_Model {
         	}
         }
 
-        return $this->update_all_menu();
+        if ($this->type_slt == "2") {
+            return $this->update_all_menu();
+        }else{
+            return $this->db->insert_id();
+        }
+        
     }
 
     function update_all_menu(){

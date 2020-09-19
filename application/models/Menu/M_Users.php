@@ -27,7 +27,7 @@ class M_Users extends VS_Model {
     	$data = array(
             "name"	=> $this->name,
             "user"	=> $this->user,
-            "password"	=> md5('07'.$this->pass),
+            "password"	=> password_hash(md5('07'.$this->pass), PASSWORD_ARGON2ID),
             "rol"	=> $this->rol,
             "id_status"	=> '1'
         );
@@ -42,12 +42,21 @@ class M_Users extends VS_Model {
     }
 
     function update(){
-    	$data = array(
-		    "name"	=> $this->name,
-		    "user"	=> $this->user,
-            "password"  => md5('07'.$this->pass),
-		    "rol" => $this->rol
-		);
+        if ($this->pass == "") {
+            $data = array(
+                "name"  => $this->name,
+                "user"  => $this->user,
+                "rol" => $this->rol
+            );
+        }else{
+            $data = array(
+                "name"  => $this->name,
+                "user"  => $this->user,
+                "password"  => password_hash(md5('07'.$this->pass), PASSWORD_ARGON2ID),
+                "rol" => $this->rol
+            );
+        }
+    	
 		$this->db->where("id_users",$this->id_user);
 		return $this->db->update("sys_users",$data);
     }
@@ -78,7 +87,7 @@ class M_Users extends VS_Model {
 
     function change_password(){
         $data = array(
-            "password"   => md5('07'.$this->pass)
+            "password"   => password_hash(md5('07'.$this->pass), PASSWORD_ARGON2ID)
         );
         $this->db->where("id_users",$this->session->IdUser);
         return $this->db->update("sys_users",$data);
