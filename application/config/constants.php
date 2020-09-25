@@ -49,8 +49,8 @@ defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_ST
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 
-defined('URL_PROJETC')       OR define('URL_PROJETC', "http://localhost/plantilla/");
-defined('URL_PROJETC1')       OR define('URL_PROJETC1', "http://localhost/plantilla/");
+defined('URL_PROJETC')       OR define('URL_PROJETC', "http://206.189.172.184");
+defined('URL_PROJETC1')       OR define('URL_PROJETC1', "http://206.189.172.184");
 
 //defined('URL_IMAGE')       OR define('URL_IMAGE', URL_PROJETC."dist/img/LogoVerticalMilestone");
 defined('URL_IMAGE')       OR define('URL_IMAGE', URL_PROJETC."dist/img/");
