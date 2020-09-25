@@ -33,3 +33,17 @@
 		
 	</tbody>
 </table>
+<script>
+   $('#table_U').DataTable( {
+
+        dom: 'Bfrtip',
+
+        buttons: [
+
+            'copy', 'csv', 'excel', 'pdf', 'print'
+
+        ]
+
+    } );
+
+</script>
