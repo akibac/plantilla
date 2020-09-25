@@ -103,6 +103,32 @@ endif;
         });
     }
 </script>
+<script>
+       $('#table_U').DataTable( {
+
+        dom: 'Bfrtip',
+
+        buttons: [
+
+            'copy', 'csv', 'excel', 'pdf', 'print'
+
+        ]
+
+    } );
+
+   $('#table_U_wrapper').DataTable( {
+
+        dom: 'Bfrtip',
+
+        buttons: [
+
+            'copy', 'csv', 'excel', 'pdf', 'print'
+
+        ]
+
+    } );
+
+</script>
 </body>
 
 </html>
