@@ -31,7 +31,7 @@
           <!-- Brand -->
           <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-              <img src="<?= base_url() ?>dist/argon/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+              <img src="<?= base_url() ?>dist/profile/logo/logo.png" class="navbar-brand-img" alt="...">
             </a>
           </div>
           <div class="navbar-inner">
